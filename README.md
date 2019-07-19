@@ -7,7 +7,7 @@
 
 ## Description
 
-This is an example of how you can use `HOC` for managing autorized, unauthorized, common etc. routes in you react application.
+This is an example of the `HOC` for managing autorized, unauthorized, common etc. routes in you react application.
 
 Firstly, we create and export a few constants, we are going to use them to define the type of a route.
 
@@ -17,11 +17,11 @@ export const LOGGED = "LOGGED";
 export const UNLOGGED = "UNLOGGED";
 ```
 
-`SHARED` - means that both autorized and unauthorized users can get access to the current route.
-`LOGGED` - only autorized users
-`UNLOGGED` - only unauthorized users
+`SHARED` - means that both autorized and unauthorized users can get access to the current route <br />
+`LOGGED` - only autorized users <br />
+`UNLOGGED` - only unauthorized users <br />
 
-Then we are should define a current user state, in our example has been used React Context API, particularly `useContext` hook but of course, you may use anything you want instead(Redux, MobX, etc.)
+Also we should define a current user state, in our example has been used React Context API, particularly `useContext` hook but of course, you may use anything you want instead (Redux, MobX, etc.).
 
 ```js
 const { user } = useContext(AuthContext);
@@ -29,7 +29,7 @@ const { user } = useContext(AuthContext);
 const logged = user ? LOGGED : UNLOGGED;
 ```
 
-After, we use the `if` statement to set a case when a user must be redirected to the login page and if the statememt wasn't triggered we just do nothing and return the actual component that was passed as an argument.
+Then we set a case when a user must be redirected to the login page otherwise we just do nothing and return the actual component that has been passed as an argument.
 
 ```js
 if (auth !== SHARED && auth !== logged) {
@@ -39,7 +39,7 @@ if (auth !== SHARED && auth !== logged) {
 return <Component {...rest} />;
 ```
 
-Here is a full example of the HOC:
+Here is a full example:
 
 ```js
 export const SHARED = 'SHARED';
