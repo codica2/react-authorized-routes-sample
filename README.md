@@ -64,9 +64,54 @@ export default auth => Component => props => {
 In order to use it at first invocation, we pass the `auth` constant and then we must pass the actual component.
 
 ```js
-const shared = auth(SHARED)(Component);
-const logged = auth(LOGGED)(Component);
-const unlogged = auth(UNLOGGED)(Component);
+import Homepage from '../pages/home';
+import Login from '../pages/login';
+import Register from '../pages/register';
+import Profile from '../pages/profile';
+
+const shared = auth(SHARED);
+const logged = auth(LOGGED);
+const unlogged = auth(UNLOGGED);
+
+const Auth = {
+  Homepage: shared(Homepage),
+  Login: unlogged(Login),
+  Register: unlogged(Register),
+  Profile: logged(Profile),
+};
+
+const App = () => (
+  <Switch>
+    <Route exact path="/" component={Auth.Homepage} />
+    <Route exact path="/login" component={Auth.Login} />
+    <Route exact path="/register" component={Auth.Register} />
+    <Route exact path="/profile" component={Auth.Profile} />
+  </Switch>
+);
+
+```
+
+Or if you prefer declatative object-based approach with `react-router`:
+
+```jsx
+
+// ...
+
+const routes = [
+  {
+    path: '/homepage',
+    auth: shared,
+    component: Homepage,
+  },
+  {
+    path: '/login',
+    auth: unlogged,
+    component: Login,
+  },
+
+  // ...
+];
+
 ```
 
 ## About Codica
